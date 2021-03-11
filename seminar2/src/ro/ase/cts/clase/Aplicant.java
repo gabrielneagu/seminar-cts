@@ -1,5 +1,7 @@
 package ro.ase.cts.clase;
 
+import java.util.Arrays;
+
 public abstract class Aplicant{
 	protected String nume;
 	protected String prenume;
@@ -33,20 +35,20 @@ public abstract class Aplicant{
 	public void setVarsta(int varsta) {
 		this.varsta = varsta;
 	}
-	public void statut(){
-		if(punctaj>80)
-			System.out.println("Aplicantul "+nume+" "+prenume+" a fost acceptat.");
-		else
-			System.out.println("Aplicantul "+nume+" "+prenume+" nu a fost acceptat.");
-		}
+	public void afisareStatutPeProiect(Proiect proiect){
+		StringBuilder builder = new StringBuilder("Aplicantul ");
+		builder.append(nume);
+		builder.append(" ");
+		builder.append(prenume);
+		builder.append(punctaj>proiect.getPragAcceptare() ? " a fost acceptat." : " nu a fost acceptat.");
+		System.out.println(builder.toString());
+	}
 	public int getPunctaj() {
 		return punctaj;
 	}
 	public void setPunctaj(int punctaj) {
 		this.punctaj = punctaj;
 	}
-	
-	
 
 	
 	public Aplicant() {
@@ -70,6 +72,23 @@ public abstract class Aplicant{
 		this.denumireProiect=denumire_proiecte;
 	}
 	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("nume=");
+		builder.append(nume);
+		builder.append(", prenume=");
+		builder.append(prenume);
+		builder.append(", varsta=");
+		builder.append(varsta);
+		builder.append(", punctaj=");
+		builder.append(punctaj);
+		builder.append(", nr_proiecte=");
+		builder.append(nr_proiecte);
+		builder.append(", denumireProiect=");
+		builder.append(Arrays.toString(denumireProiect));
+		return builder.toString();
+	}
 	public abstract int getFinantare();
 
 }
